@@ -1,0 +1,14 @@
+[user]
+	email = <mail>
+	name = marcjulianschwarz
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[remote "origin"]
+	prune = true
+[alias]
+	nuke = !git reset --hard HEAD && git clean -fd
+	rw = !git reset --mixed
+ [core]
+excludesfile = ~/.gitignore_global

@@ -1,0 +1,35 @@
+background-opacity=1
+background-blur=true
+
+minimum-contrast=1
+
+unfocused-split-opacity=1
+
+font-size = 18
+font-thicken=true
+bold-is-bright=true
+
+theme = my-dark
+#theme = dark:my-dark,light:my-light
+
+keybind = option+super+left=previous_tab
+keybind = option+super+right=next_tab
+
+working-directory = home
+window-inherit-working-directory = true
+
+keybind = global:shift+cmd+g=toggle_quick_terminal
+keybind = shift+enter=text:\x1b\r
+
+window-padding-x = 25
+window-padding-y = 15
+window-width=139
+window-height=36
+
+macos-icon-frame = aluminum
+macos-icon = custom-style
+macos-icon-ghost-color = white
+macos-icon-screen-color = white
+macos-titlebar-proxy-icon = hidden
+
+shell-integration-features = ssh-env

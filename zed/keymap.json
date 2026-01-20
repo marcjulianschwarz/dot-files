@@ -1,0 +1,33 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      "shift-cmd-r": "editor::Rename",
+      "cmd-/": "editor::ToggleComments",
+      "cmd-s": "editor::Format",
+      "cmd-shift-enter": "git::Push",
+
+      // Workaround to get global all folder collapse with cmd-k cmd-f
+      // by first focusing the project panel, running keyboard shortcut
+      // then unfocusing project panel
+      "ctrl-alt-cmd-space": "project_panel::CollapseAllEntries",
+      "cmd-k cmd-f": [
+        "workspace::SendKeystrokes",
+        "cmd-shift-e ctrl-alt-cmd-space cmd-shift-e",
+      ],
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      // switches into git diff without switching to git panel
+      "cmd-g": "git::Diff",
+    },
+  },
+]

@@ -1,0 +1,373 @@
+# Run to get bash autocomplete functions in zsh shell
+# autoload bashcompinit
+# bashcompinit
+# autoload -Uz compinit
+# compinit
+
+export EDITOR=zed
+
+# List all conda environments
+function envs() {
+    cat $HOME/.conda/environments.txt
+}
+
+# Activate environment with autocompletion
+function aenv(){
+    conda activate $1
+}
+
+
+function extract_env_names() {
+    while IFS= read -r path
+    do
+        basename "$path"
+    done < $HOME/.conda/environments.txt
+}
+
+function _aenv() {
+    # Get the current word being completed
+    local cur=${COMP_WORDS[COMP_CWORD]}
+
+    # Generate possible matches and store them in the COMPREPLY variable
+    # -W expects a list of possible matches
+    COMPREPLY=($(compgen -W "$(extract_env_names)" -- $cur))
+}
+
+# Register the completion function to be called for the aenv command
+complete -F _aenv aenv
+
+function denv(){
+    conda deactivate
+}
+
+# Create a conda environment with a name and python version
+function cenv(){
+    conda create -n $1 python=$2
+}
+
+function renv(){
+    conda remove -n $1 --all
+}
+
+# Create a python kernel from a conda environment
+function envtokernel(){
+    python -m ipykernel install --user --name $1 --display-name "Python ($1)"
+}
+
+# Create a conda environment with some sane default packages that I use a lot in data science projects
+function defaultenv(){
+    cenv $1 $2
+    conda activate $1
+    pip install pandas numpy matplotlib seaborn scikit-learn notebook
+    envtokernel $1
+}
+
+
+export MARKPATH="$HOME/marks"
+
+# make sure that go (the language) still works
+alias golang='command go'
+
+# jump to a marked path
+function go() {
+    # change directory to the marked path, if it does not exist, ignore the error and print "No such mark: $1" instead
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+    clear
+}
+
+function omark() {
+    open "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+
+function cmark() {
+    code "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+
+# mark a path for quick access
+function mark() {
+    # create a folder to store marks
+    mkdir -p "$MARKPATH"
+
+    # create a symlink in the mark folder to the current directory
+    ln -s "$(pwd)" "$MARKPATH/$1"
+}
+
+# delete a mark
+function unmark() {
+    # remove the symlink
+    rm -i "$MARKPATH/$1"
+}
+
+# list all marks
+function marks() {
+    # list all symlinks in the mark folder with some formatting magic to make it look nicer
+    \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+}
+
+# autocomplete marks
+function _cdd() {
+    # get the current word being completed
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    # generate possible matches and store them in the COMPREPLY variable
+    COMPREPLY=($(compgen -W "$(ls $MARKPATH)" -- $cur))
+}
+
+# register the completion function to be called for the cdd command
+complete -F _cdd go
+complete -F _cdd op
+complete -F _cdd cmark
+
+
+function b {
+    cd ..
+}
+
+function bb {
+    cd ..
+    cd ..
+}
+
+function bbb {
+    cd ..
+    cd ..
+    cd ..
+}
+
+function c() {
+    if [ $# -eq 0 ]; then
+        # No arguments - open current directory in VS Code
+        code .
+    elif [ -L "$MARKPATH/$1" ]; then
+        # Argument is a mark - open the marked path in VS Code
+        code "$MARKPATH/$1"
+    else
+        # Argument is not a mark - use original behavior
+        code "$@"
+    fi
+}
+
+function o() {
+    if [ $# -eq 0 ]; then
+        # No arguments - open current directory
+        open .
+    elif [ -L "$MARKPATH/$1" ]; then
+        # Argument is a mark - open the marked path
+        open "$MARKPATH/$1"
+    else
+        # Argument is not a mark - use original behavior
+        open "$@"
+    fi
+}
+
+function z() {
+    if [ $# -eq 0 ]; then
+        # No arguments - open zed in current directory
+        zed .
+    elif [ -L "$MARKPATH/$1" ]; then
+        # Argument is a mark - open the marked path in zed
+        zed "$MARKPATH/$1"
+    else
+        # Argument is not a mark - use original behavior
+        zed "$@"
+    fi
+}
+
+function k(){
+    clear
+}
+
+
+function conf(){
+    open "raycast://extensions/raycast/raycast/confetti"
+    open -a Ghostty
+}
+
+
+function serve(){
+    open "http://localhost:$1"
+    python -m http.server $1
+}
+
+function obs(){
+    open "raycast://extensions/marcjulian/obsidian/openVaultCommand"
+}
+
+function plist(){
+    lsof -i :$1
+}
+
+function pkill(){
+    kill -9 $1
+}
+
+
+eval "$(thefuck --alias)"
+
+replace_in_clipboard() {
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: replace_in_clipboard <find_string> <replace_string>"
+        return 1
+    fi
+
+    local find_string="$1"
+    local replace_string="$2"
+
+    # For macOS
+    if [[ "$(uname)" == "Darwin" ]]; then
+        local clipboard_content=$(pbpaste)
+        local modified_content=$(echo "$clipboard_content" | sed -e "s|${find_string}|${replace_string}|g")
+        echo "$modified_content" | pbcopy
+    # For Linux (requires xclip)
+    elif [[ "$(uname)" == "Linux" ]]; then
+        local clipboard_content=$(xclip -selection clipboard -o)
+        local modified_content=$(echo "$clipboard_content" | sed -e "s|${find_string}|${replace_string}|g")
+        echo "$modified_content" | xclip -selection clipboard
+    else
+        echo "Unsupported operating system"
+        return 1
+    fi
+
+    echo "Replacement complete. Updated content is now in your clipboard."
+}
+
+
+function nano {
+	micro "$@"
+}
+
+function n {
+	micro "$@"
+}
+
+function cat() {
+    bat "$@"
+}
+
+function q {
+	exit
+}
+
+function nanoo {
+	nano "$@"
+}
+
+function rm {
+    trash "$@"
+    echo "Trashed 🗑️"
+}
+
+function rmm {
+    rm "$@"
+}
+
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
+
+rzsh() {
+    exec zsh
+}
+
+
+# Load NVM by default
+export NVM_DIR="$HOME/.nvm"
+
+# Load NVM
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Load bash completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+
+# Optimize Atuin settings before initialization
+export ATUIN_HISTORY_UPDATE="false"
+eval "$(atuin init zsh)"
+
+
+source <(fzf --zsh)
+
+function zo {
+    local file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')
+    if [ -n "$file" ]; then
+        nano "$file"
+    fi
+}
+
+function mog() {
+    mogrify -format jpg -geometry 1300x *.png
+}
+
+function ys() {
+	yarn start
+}
+
+function yt() {
+	yarn test
+}
+
+function yte() {
+	yarn test:e2e
+}
+
+function paste() {
+    pbpaste > "$1"
+}
+
+function copy() {
+    if [ $# -eq 0 ]; then
+        # No arguments - read from stdin
+        pbcopy
+    else
+        # Arguments provided - copy file contents
+        cat "$@" | pbcopy
+    fi
+}
+
+function gbc() {
+    local branch=$(git branch --show-current 2>/dev/null)
+
+    if [ -z "$branch" ]; then
+        echo "Error: Not in a git repository or no branch found"
+        return 1
+    fi
+
+    echo "$branch" | pbcopy
+    echo "🎉 Copied $branch"
+}
+
+
+
+function ship() {
+	./deploy.sh "$@"
+	echo "🎉 Shipped"
+	conf
+}
+
+
+function fullscreen() {
+	osascript -e 'tell application "System Events" to keystroke "f" using {command down, control down}'
+}
+
+function boo() {
+	ghostty +boo
+}
+
+function boof() {
+	fullscreen
+	boo
+}
+
+function color_sample() {
+	for i in {0..255}; do
+	    printf "\033[38;5;${i}m Color $i: ████████ Sample \033[0m\n"
+	done
+}
+
+function password() {
+	openssl rand -hex 32
+}
+
+clear

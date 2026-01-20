@@ -1,0 +1,17 @@
+christian-kohler.path-intellisense
+eamodio.gitlens
+esbenp.prettier-vscode
+github.github-vscode-theme
+ms-python.debugpy
+ms-python.isort
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+njpwerner.autodocstring
+visualstudioexptteam.intellicode-api-usage-examples
+visualstudioexptteam.vscodeintellicode
+vscode-icons-team.vscode-icons
