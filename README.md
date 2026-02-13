@@ -131,3 +131,23 @@ brew install tree
 ## Install apps
 
 See [my tools](https://marc-julian.com/#mytools).
+
+## Python
+
+Install `uv` here: https://docs.astral.sh/uv/
+
+Add uv support to an existing simple python project:
+
+```toml
+[project]
+name = "some-project"
+version = "0.1.0"
+description = ""
+requires-python = "==3.12.*"
+dependencies = []
+```
+
+```bash
+uv init
+uv add -r requirements.tx
+```
