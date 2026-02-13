@@ -67,3 +67,13 @@ and
 ```
 ./install_ext.sh
 ```
+
+## Install brew packages
+
+```bash
+brew install atuin
+brew install db-browser-for-sqlite
+brew install bat
+brew install micro
+brew install tree
+```
