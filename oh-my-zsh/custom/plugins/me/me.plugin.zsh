@@ -4,6 +4,9 @@
 # autoload -Uz compinit
 # compinit
 
+# enable to run zprof for speed tests
+# zmodload zsh/zprof
+
 export EDITOR=zed
 
 # List all conda environments
@@ -271,29 +274,14 @@ rzsh() {
 }
 
 
-# Load NVM by default
-export NVM_DIR="$HOME/.nvm"
-
-# Load NVM
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# Load bash completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-
 # Optimize Atuin settings before initialization
 export ATUIN_HISTORY_UPDATE="false"
+export ATUIN_HISTORY_LIMIT=5000        # Reduce history items loaded
+export ATUIN_AUTO_SYNC="false"         # Disable cloud sync
+export ATUIN_UPDATE_CHECK="false"      # Disable update checks
+export ATUIN_SYNC_FREQUENCY=0
 eval "$(atuin init zsh)"
 
-
-source <(fzf --zsh)
-
-function zo {
-    local file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')
-    if [ -n "$file" ]; then
-        nano "$file"
-    fi
-}
 
 function mog() {
     mogrify -format jpg -geometry 1300x *.png
@@ -368,5 +356,3 @@ function color_sample() {
 function password() {
 	openssl rand -hex 32
 }
-
-clear
