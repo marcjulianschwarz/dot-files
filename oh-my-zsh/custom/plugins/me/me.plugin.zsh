@@ -201,7 +201,6 @@ function pkill(){
 }
 
 
-eval "$(thefuck --alias)"
 
 replace_in_clipboard() {
     if [[ $# -ne 2 ]]; then
