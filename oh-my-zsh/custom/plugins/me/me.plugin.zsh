@@ -356,3 +356,5 @@ function color_sample() {
 function password() {
 	openssl rand -hex 32
 }
+
+eval "$(fnm env --use-on-cd --shell zsh)"
