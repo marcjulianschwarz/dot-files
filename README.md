@@ -64,9 +64,10 @@ Symlink oh-my-zsh plugins and themes.
 
 ```
 cd $HOME
-rm -rf oh-my-zsh/custom
-ln -s $HOME/Mac/GitHub/marcjulianschwarz/dot-files/oh-my-zsh/custom/plugins/me ~/.oh-my-zsh/custom/plugins
-ln -s $HOME/Mac/GitHub/marcjulianschwarz/dot-files/oh-my-zsh/custom/themes/me.zsh-theme ~/.oh-my-zsh/custom/themes
+rm -rf $HOME/.oh-my-zsh/custom
+ln -s $HOME/Mac/GitHub/marcjulianschwarz/dot-files/oh-my-zsh/custom/plugins/me $HOME/.oh-my-zsh/custom/plugins
+rm -rf $HOME/.oh-my-zsh/custom/themes
+ln -s $HOME/Mac/GitHub/marcjulianschwarz/dot-files/oh-my-zsh/custom/themes/me.zsh-theme $HOME/.oh-my-zsh/custom/themes
 ```
 
 Enable plugin and theme in `.zshrc` by adding `me` to the list of plugins and set theme to `me`.
@@ -74,7 +75,9 @@ Enable plugin and theme in `.zshrc` by adding `me` to the list of plugins and se
 ## Ghostty
 
 ```
- ln -s "$HOME/Mac/GitHub/marcjulianschwarz/dot-files/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+rm "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+ln -s "$HOME/Mac/GitHub/marcjulianschwarz/dot-files/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+ln -s "$HOME/Mac/GitHub/marcjulianschwarz/dot-files/ghostty/themes" "$HOME/.config/ghostty"
 ```
 
 ## Micro
@@ -87,6 +90,13 @@ ln -s "$HOME/Mac/GitHub/marcjulianschwarz/dot-files/micro" "$HOME/.config/micro"
 
 - `brew install tmux`
 - https://github.com/gpakosz/.tmux
+
+## Finicky.js
+
+```bash
+rm $HOME/.finicky.js
+ln -s "$HOME/Mac/GitHub/marcjulianschwarz/dot-files/finicky.js/.finicky.js" "$HOME/.finicky.js"
+```
 
 ## VSCode
 
