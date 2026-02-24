@@ -130,12 +130,22 @@ and
 
 ## Install brew packages
 
+- `atuin` for searchable shell history
+- `db-browser-for-sqlite`
+- `bat` to replace `cat` with syntax highlighting
+- `micro` to replace `nano`
+- `tree`
+- `uv` for better python projects and dependency management
+- `fnm` faster `nvm` alternative
+
 ```bash
 brew install atuin
 brew install db-browser-for-sqlite
 brew install bat
 brew install micro
 brew install tree
+brew install uv
+brew install fnm
 ```
 
 ## Install apps
