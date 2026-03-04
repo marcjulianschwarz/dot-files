@@ -138,6 +138,7 @@ and
 - `uv` for better python projects and dependency management
 - `fnm` faster `nvm` alternative
 - `claude-code`
+- `gh`
 
 ```bash
 brew install atuin
@@ -148,6 +149,7 @@ brew install tree
 brew install uv
 brew install fnm
 brew install --cask claude-code
+brew install gh
 ```
 
 ## Install apps
