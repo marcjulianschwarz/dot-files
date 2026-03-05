@@ -10,3 +10,4 @@
 - Use `uv add` to add new dependencies
 - If you create new empty lists, always specify the type of the list like this: `result: list[MyType] = []`
 - If you set properties of classes without marking them as final, add a type to them: `self.x: int = x`
+- Never run random `python -c` code snippets
