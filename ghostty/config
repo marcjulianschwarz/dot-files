@@ -16,7 +16,9 @@ keybind = option+super+left=previous_tab
 keybind = option+super+right=next_tab
 
 working-directory = home
-window-inherit-working-directory = true
+window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = true
 
 keybind = global:shift+cmd+g=toggle_quick_terminal
 keybind = shift+enter=text:\x1b\r
