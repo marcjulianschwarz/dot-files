@@ -139,6 +139,7 @@ and
 - `fnm` faster `nvm` alternative
 - `claude-code`
 - `gh`
+- `kubectl` to control kubernetes cluster
 
 ```bash
 brew install atuin
@@ -150,6 +151,7 @@ brew install uv
 brew install fnm
 brew install --cask claude-code
 brew install gh
+brew install kubernetes-cli
 ```
 
 ## Install apps
