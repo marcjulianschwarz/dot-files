@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "disable_ai": true,
   "icon_theme": "Zed (Default)",
   "session": {
     "trust_all_worktrees": true,
@@ -42,7 +43,7 @@
   "ui_font_size": 18,
   "buffer_font_size": 18,
   "theme": {
-    "mode": "system",
+    "mode": "light",
     "light": "Ayu Light",
     "dark": "Ayu Dark",
   },
@@ -72,7 +73,7 @@
     "show_diagnostics": "all",
   },
   "file_scan_exclusions": [
-    "**/__init__.py",
+    //"**/__init__.py",
     "**/.git",
     "**/.svn",
     "**/.hg",
@@ -110,6 +111,25 @@
           },
         },
       },
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "configuration": "./pyproject.toml",
+        },
+      },
+    },
+  },
+  "languages": {
+    "Python": {
+      "language_servers": [
+        "ruff",
+        "black",
+        "basedpyright",
+        "!ty",
+        "!pylsp",
+        // "...",
+      ],
     },
   },
 }
