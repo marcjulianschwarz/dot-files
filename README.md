@@ -140,6 +140,7 @@ and
 - `claude-code`
 - `gh`
 - `kubectl` to control kubernetes cluster
+- `pnpm` for a faster `yarn` and `npm` alternative
 
 ```bash
 brew install atuin
@@ -152,6 +153,7 @@ brew install fnm
 brew install --cask claude-code
 brew install gh
 brew install kubernetes-cli
+brew install pnpm
 ```
 
 ## Install apps

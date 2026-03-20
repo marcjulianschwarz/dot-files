@@ -62,15 +62,15 @@ git_prompt_info() {
     fi
 
     # Format with indicator in front of branch name
-    local formatted="%{$fg[black]%}("
+    local formatted="%{$fg[white]%}("
 
     if [[ -n "$indicator" ]]; then
-      formatted+="$indicator_color$indicator%{$reset_color%}%{$fg[black]%}/%{$reset_color%}"
+      formatted+="$indicator_color$indicator%{$reset_color%}%{$fg[white]%}/%{$reset_color%}"
     fi
 
     formatted+="%{$fg_bold[green]%}$branch"  # Made branch name bold green
     [[ $is_dirty -eq 1 ]] && formatted+="%{$fg[yellow]%}*%{$reset_color%}"
-    formatted+="%{$fg[black]%})%{$reset_color%}"
+    formatted+="%{$fg[white]%})%{$reset_color%}"
 
     echo "$formatted"
   fi
