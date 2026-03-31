@@ -9,7 +9,7 @@ font-size = 18
 font-thicken=true
 bold-is-bright=true
 
-#theme = my-dark
+theme = my-light
 #theme = dark:my-dark,light:my-light
 
 keybind = option+super+left=previous_tab
