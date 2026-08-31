@@ -9,63 +9,6 @@
 
 export EDITOR=zed
 
-# List all conda environments
-function envs() {
-    cat $HOME/.conda/environments.txt
-}
-
-# Activate environment with autocompletion
-function aenv(){
-    conda activate $1
-}
-
-
-function extract_env_names() {
-    while IFS= read -r path
-    do
-        basename "$path"
-    done < $HOME/.conda/environments.txt
-}
-
-function _aenv() {
-    # Get the current word being completed
-    local cur=${COMP_WORDS[COMP_CWORD]}
-
-    # Generate possible matches and store them in the COMPREPLY variable
-    # -W expects a list of possible matches
-    COMPREPLY=($(compgen -W "$(extract_env_names)" -- $cur))
-}
-
-# Register the completion function to be called for the aenv command
-complete -F _aenv aenv
-
-function denv(){
-    conda deactivate
-}
-
-# Create a conda environment with a name and python version
-function cenv(){
-    conda create -n $1 python=$2
-}
-
-function renv(){
-    conda remove -n $1 --all
-}
-
-# Create a python kernel from a conda environment
-function envtokernel(){
-    python -m ipykernel install --user --name $1 --display-name "Python ($1)"
-}
-
-# Create a conda environment with some sane default packages that I use a lot in data science projects
-function defaultenv(){
-    cenv $1 $2
-    conda activate $1
-    pip install pandas numpy matplotlib seaborn scikit-learn notebook
-    envtokernel $1
-}
-
-
 export MARKPATH="$HOME/marks"
 
 # make sure that go (the language) still works
@@ -188,7 +131,7 @@ function conf(){
 
 function serve(){
     open "http://localhost:$1"
-    python -m http.server $1
+    python3 -m http.server $1
 }
 
 function obs(){
@@ -355,6 +298,10 @@ function color_sample() {
 
 function password() {
 	openssl rand -hex 32
+}
+
+function gt() { 
+    git tag "$1" && git push origin "$1" 
 }
 
 eval "$(fnm env --use-on-cd --shell zsh)"

@@ -12,6 +12,9 @@ bold-is-bright=true
 #theme = my-dark
 #theme = dark:my-dark,light:my-light
 
+
+
+
 keybind = option+super+left=previous_tab
 keybind = option+super+right=next_tab
 
