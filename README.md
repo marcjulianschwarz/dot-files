@@ -141,6 +141,7 @@ and
 - `gh`
 - `kubectl` to control kubernetes cluster
 - `pnpm` for a faster `yarn` and `npm` alternative
+- `finicky` to remap URLs to other URLs and to different browsers
 
 ```bash
 brew install atuin
@@ -154,6 +155,7 @@ brew install --cask claude-code
 brew install gh
 brew install kubernetes-cli
 brew install pnpm
+brew install --cask finicky
 ```
 
 ## Install apps

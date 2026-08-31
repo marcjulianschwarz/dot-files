@@ -27,5 +27,9 @@ export default {
       match: "*meet.google.com/*",
       browser: "Zen",
     },
+    {
+      match: "*analytics.govradar.net/*",
+      browser: "Safari",
+    },
   ],
 };
